@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Weathercard from "./components/Weathercard";
 import Country from "./components/Country";
@@ -13,6 +13,12 @@ const App = () => {
   const [weatherImg, setWeatherImg] = useState();
 
   const REACT_APP_API = process.env.REACT_APP_api;
+
+  useEffect(() => {
+    handleGetApi()
+    console.log("API WAS CALLED");
+  },[latitude, latitude]);
+  
 
   const handleGetApi = () => {
     axios
@@ -60,7 +66,7 @@ const App = () => {
   /* w-96 h-full bg-pink-700 */
   return (
     <div /* className="min-h-screen" */ className={weatherImg === "Clear" ? "bg-clear" : weatherImg === "Clouds" ? "bg-clouds" : weatherImg === "Snow" ? "bg-snow" : weatherImg === "Thunderstorm" ? "bg-thunderstorm" : weatherImg === "Rain" ? "bg-rain" : weatherImg === "Drizzle" ?  "bg-drizzle" : "bg-weatherLast" } >
-      <div className="h-screen backdrop-blur-sm">
+      <div className="min-h-screen backdrop-blur-sm">
       {
         <div className="flex mb-4 overflow-scroll no-scrollbar overflow-y-hidden">
           {info.map((item, index) => (
